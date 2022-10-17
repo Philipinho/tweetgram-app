@@ -5,25 +5,18 @@
     <div class="o-page__card">
         <div class="c-card c-card--center">
           <span class="c-icon c-icon--large u-mb-small">
+              <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             <!--  <x-application-logo class="w-20 h-20 fill-current text-gray-500" />-->
 <!--            <img src="img/logo-small.svg" alt="Neat">-->
           </span>
 
-            <h4 class="u-mb-medium">Sing Up to Get Started</h4>
+            <h4 class="u-mb-medium">Sign up</h4>
 
             <!-- Validation Errors -->
             <x-auth-validation-errors class="mb-3" :errors="$errors" />
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
-
-                <div class="c-field">
-                    <x-label for="name" :value="__('Name')" class="c-field__label">Name</x-label>
-                    <x-input id="name" class="c-input u-mb-small"
-                             type="text"
-                             name="name"
-                             :value="old('name')" placeholder="e.g. Adam Sandler" required autofocus />
-                </div>
 
                 <div class="c-field">
                     <x-label for="email" :value="__('Email')" class="c-field__label">Email Address</x-label>
@@ -38,7 +31,7 @@
                     <x-input id="password" class="c-input"
                              type="password"
                              name="password"
-                             placeholder="Numbers, Pharagraphs Only" required autocomplete="new-password" />
+                             required autocomplete="new-password" />
                 </div>
 
                 <x-button class="c-btn c-btn--fullwidth c-btn--info">
