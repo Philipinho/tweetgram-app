@@ -37,7 +37,7 @@ class UpdateAccountController extends Controller
     public function update_password(Request $request){
         $request->validate([
             'current_password' => ['required', new MatchCurrentPasswordRule],
-            'password' => ['required','confirmed','min:8'],
+            'password' => ['required','string','confirmed','min:5'],
         ]);
 
         auth()->user()->update(['password' => Hash::make($request->get("password"))]);
