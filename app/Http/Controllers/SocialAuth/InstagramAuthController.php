@@ -101,9 +101,11 @@ class InstagramAuthController extends Controller
             }
 
             $sql_query = ['insta_username' => $username, 'insta_user_id' => $userId,
-                'insta_access_token' => $longAccessToken, 'insta_access_token_expires' => $accessTokenExpiry,
+                'insta_access_token' => Crypt::encryptString($longAccessToken), 'insta_access_token_expires' => $accessTokenExpiry,
                 'insta_last_post_id' => $lastPostId, 'insta_last_timestamp' => $lastPostTime,
-                'updated_at' => date('Y-m-d H:i:s'), 'active' => '1'];
+                'updated_at' => date('Y-m-d H:i:s'), 'status' => '1'];
+
+            // only make active if other network connection is active and not empty
 
             if(DB::table('social_accounts')->where('owner_id', Auth::id())->exists()) {
                 DB::table('social_accounts')
@@ -114,7 +116,7 @@ class InstagramAuthController extends Controller
 
                 $filtered_query = Arr::add($sql_query, 'owner_id', Auth::id());
                 $filtered_query = Arr::add($filtered_query, 'social_id', $social_id);
-                $filtered_query = Arr::except($filtered_query, ['updated_at','active']);
+                $filtered_query = Arr::except($filtered_query, ['updated_at','status']);
 
                 DB::table('social_accounts')->insert($filtered_query);
             }

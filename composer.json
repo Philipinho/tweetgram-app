@@ -6,7 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-json": "*",
         "abraham/twitteroauth": "^4.0",
+        "espresso-dev/instagram-basic-display-php": "^1.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/breeze": "1.9.2",
@@ -14,8 +16,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "protonemedia/laravel-paddle": "^2.4",
-        "spatie/laravel-flash": "^1.9",
-        "ext-json": "*"
+        "spatie/laravel-flash": "^1.9"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

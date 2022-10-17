@@ -14,18 +14,12 @@ class Telegram {
 
         try {
 
-            $request = $client->request("GET", "https://api.telegram.org/bot{$bot_token}/sendMessage", [
+            $client->request("GET", "https://api.telegram.org/bot{$bot_token}/sendMessage", [
                 'verify' => false,
                 'form_params' => [
                     'chat_id' => $tg_admin_id,
                     'text' => $message,
-                    //'client_id' => $clientId,
-            ]]);
-
-            //if ($response->getStatusCode() != 200) {
-              //  flash()->error('Unauthorized login to Twitter.');
-               // return redirect()->route('/dashboard');
-            //}
+                    ]]);
 
         } catch (\Exception $e){
             echo $e->getMessage();

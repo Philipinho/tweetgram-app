@@ -129,7 +129,7 @@ class TwitterPKCEController extends Controller
                 'tw_token_scope' => $tokenScope, 'tw_access_token_expires' => $tokenExpiryDate,
                 'tw_photo_url' => $user_pic, 'tw_followers' => $followers, 'tw_location' => $location,
                 'tw_verified' => $verified, 'tw_api_version' => '2',
-                'updated_at' => date('Y-m-d H:i:s'), 'active' => '1'];
+                'updated_at' => date('Y-m-d H:i:s'), 'status' => '1'];
 
             if (DB::table('social_accounts')->where('owner_id', Auth::id())->exists()) {
                 DB::table('social_accounts')
@@ -140,7 +140,7 @@ class TwitterPKCEController extends Controller
 
                 $filtered_query = Arr::add($sql_query, 'owner_id', Auth::id());
                 $filtered_query = Arr::add($filtered_query, 'social_id', $social_id);
-                $filtered_query = Arr::except($filtered_query, ['updated_at','active']);
+                $filtered_query = Arr::except($filtered_query, ['updated_at','status']);
 
                 DB::table('social_accounts')->insert($filtered_query);
             }

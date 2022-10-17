@@ -64,8 +64,8 @@
                     </li>
 
                     <li>
-                        <a class="c-sidebar__link" href="{{ route("profile")  }}">
-                            <i class="c-sidebar__icon feather icon-users"></i>Profile
+                        <a class="c-sidebar__link" href="{{ route("account")  }}">
+                            <i class="c-sidebar__icon feather icon-users"></i>Account
                         </a>
                     </li>
 
@@ -117,7 +117,7 @@
 
                 <div class="c-dropdown__menu has-arrow dropdown-menu dropdown-menu-right"
                      aria-labelledby="dropdownMenuAvatar">
-                    <a class="c-dropdown__item dropdown-item" href="{{ route("profile")  }}">Profile</a>
+                    <a class="c-dropdown__item dropdown-item" href="{{ route("account")  }}">Account</a>
                     <a class="c-dropdown__item dropdown-item" href="{{ route("logout")  }}">Log out</a>
                 </div>
             </div>

@@ -27,6 +27,7 @@ class CreateTweetsPostedTable extends Migration
             $table->string('insta_username')->nullable();
             $table->string('insta_post_id')->nullable();
             $table->string('insta_post_url')->nullable();
+            $table->text('insta_thumbnail_url')->nullable();
             $table->dateTime('insta_post_time')->nullable();
 
             $table->string('recorded_error')->nullable();

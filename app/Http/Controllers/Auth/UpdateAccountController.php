@@ -12,20 +12,20 @@ use Illuminate\Support\Facades\Hash;
 class UpdateAccountController extends Controller
 {
     public function show(){
-        return view("profile");
+        return view("account.account");
     }
 
     public function update_info(Request $request){
 
         $request->validate([
-            'email' => ['required', 'email'],
             'name' => ['required','string','max:255'],
+            'email' => ['required', 'email'],
             //'company' => ['nullable','string','max:255'],
         ]);
 
         auth()->user()->update([
-            'email' => $request->get("email"),
             'name' => $request->get("name"),
+            'email' => $request->get("email"),
             //'company' => $request->get("company")
         ]);
 
@@ -40,7 +40,7 @@ class UpdateAccountController extends Controller
             'password' => ['required','confirmed','min:8'],
         ]);
 
-        auth()->user()->update(['password',Hash::make($request->get("password"))]);
+        auth()->user()->update(['password' => Hash::make($request->get("password"))]);
         flash()->success("Password changed successfully");
 
         return redirect()->route("profile");

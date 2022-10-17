@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-md-6">
 
-                                <form action="{{ route("profile") }}" method="POST">
+                                <form action="{{ route("account") }}" method="POST">
                                     @csrf
                                     @method("PUT")
 
@@ -44,14 +44,14 @@
                                         <x-input class="c-input" type="text" name="name" id="name"
                                                  value="{{ auth()->user()->name }}" required/>
                                         @error("name")
-                                          <p class="u-text-danger">{{ $message }}</p>
+                                        <p class="u-text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
 
                                     <div class="c-field u-mb-xsmall">
                                         <label class="c-field__label" for="user-email">Email Address</label>
 
-                                        <x-input class="c-input" name="email" type="email"
+                                        <x-input class="c-input" name="email" id="email" type="email"
                                                  value="{{ auth()->user()->email }}" />
 
                                         @error("email")
@@ -64,8 +64,9 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
+
+                        @include("account.security")
 
                     </div>
                 </div>

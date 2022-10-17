@@ -36,7 +36,7 @@ class DashboardController extends Controller
         $data = array();
 
         if ($account){
-            $data = array('active' => $account->active, 'insta_username' => $account->insta_username,
+            $data = array('status' => $account->status, 'insta_username' => $account->insta_username,
                 'tw_username' => $account->tw_username, 'plan' => $plan,
                 'auto_post' => $account->auto_post, 'remove_hashtags' => $account->remove_hashtags,
                 'remove_caption' => $account->remove_caption, 'remove_mentions' => $account->remove_mentions);

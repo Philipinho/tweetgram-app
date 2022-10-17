@@ -18,79 +18,64 @@
                     <p>You will have to log in with your social media profiles to complete your account setup.</p>
                 </div>
                 <div class="u-mt-small">
-                    <a href="/instagram/auth" class="c-btn u-mb-xsmall"
+                    <a href="{{ route('instagram.redirect') }}" class="c-btn u-mb-xsmall"
                        style="background:#C3328C;"> <i class="feather icon-instagram"></i> Connect Instagram</a>
                 </div>
 
-                {{-- @if(!App\Libs\Helpers::isTwitterActive())--}}
+
                 <div class="u-mt-small">
-                    <a href="/twitter/auth" class="c-btn u-mb-xsmall"
+                    <a href="{{ route('twitter.redirect') }}" class="c-btn u-mb-xsmall"
                        style="background: #1bb1dc;"><i class="feather icon-twitter"></i> Connect Twitter</a>
                 </div>
-                {{--@endif--}}
+
 
             </div>
     @else
 
-    {{--If no record from social accounts, display connection buttons--}}
-    @if($active == 2)
-        {{--code == 2--}}
-        <div id="notification" class="c-alert c-alert--danger u-mb-xsmall">
-         <span class="c-alert__icon">
-         <i class="feather icon-slash"></i>
-         </span>
-            <div class="c-alert__content">
-                <h4 class="c-alert__title">Account In-active</h4>
-                <p>You'll have to re-login with your social media profiles to re-activate your account.</p>
-            </div>
+    @if($status == 0 || $status == 1 || $status ==2)
+        <div id="notification" class="c-alert @if($status == 1) c-alert--success @else c-alert--danger @endif u-mb-xsmall">
 
-            <div class="u-mt-small">
-                <a href="/instagram/auth" class="c-btn u-mb-xsmall"
-                   style="background:#C3328C;"> <i class="feather icon-instagram"></i> Connect Instagram</a>
-            </div>
-
-           {{-- <div class=" u-mt-small">
-                <a href="/logout" class="c-btn c-btn--danger u-mb-xsmall">Re-Activate Now</a>
-            </div>--}}
-        </div>
-    @endif
-
-    @if($active == 1)
-        <div id="notification" class="c-alert c-alert--success u-mb-xsmall">
-         <span class="c-alert__icon">
-         <i class="feather icon-circle"></i>
-         </span>
-            <div class="c-alert__content">
-                <h4 class="c-alert__title">Setup complete</h4>
-                <p>Nothing more to do. Your Instagram posts will automatically be tweeted.</p>
-            </div>
-            <!--<div class=" u-mt-small">
-               <a href="/upgrade" class="c-btn c-btn--success u-mb-xsmall">Upgrade To PRO</a>
-               </div>-->
-        </div>
-    @endif
-
-    @if($active == 1)
-        <div id="notification" class="c-alert c-alert--danger u-mb-xsmall">
-         <span class="c-alert__icon">
-         <i class="feather icon-slash"></i>
-         </span>
-            <div class="c-alert__content">
-                <h4 class="c-alert__title">Connect your profiles to get started</h4>
-                <p>You will have to log in with your social media profiles to complete your account setup.</p>
-            </div>
-            <div class="u-mt-small">
-                <a href="/instagram/auth" class="c-btn u-mb-xsmall"
-                   style="background:#C3328C;"> <i class="feather icon-instagram"></i> Connect Instagram</a>
-            </div>
-
-           {{-- @if(!App\Libs\Helpers::isTwitterActive())--}}
-                <div class="u-mt-small">
-                    <a href="/twitter/auth" class="c-btn u-mb-xsmall"
-                       style="background: #1bb1dc;"><i class="feather icon-twitter"></i> Connect Twitter</a>
+            @if($status == 1)
+                <span class="c-alert__icon">
+                    <i class="feather icon-circle"></i>
+                </span>
+                <div class="c-alert__content">
+                    <h4 class="c-alert__title">Setup complete</h4>
+                    <p>Nothing more to do. Your Instagram posts will be tweeted automatically.</p>
                 </div>
-            {{--@endif--}}
+            @else
+                <span class="c-alert__icon">
+                    <i class="feather icon-slash"></i>
+                </span>
+                <div class="c-alert__content">
+                    <h4 class="c-alert__title">Connect your profiles to get started</h4>
+                    <p>You will have to log in with your social media profiles to complete your account setup.</p>
+                </div>
+            @endif
 
+            <div class="u-mt-small">
+                @if(App\Libs\Helpers::isInstagramActive())
+                <button class="c-btn u-mb-xsmall"
+                        style="background:#C3328C;"> <i class="feather icon-instagram"></i> {{$insta_username}}</button>
+                    <a href="{{ route('instagram.redirect') }}" data-toggle="tooltip" title="Reconnect account"
+                       class="c-btn c-btn--danger btn-xsmall"><i class="feather icon-rotate-ccw"></i></a>
+                @else
+                    <a href="{{ route('instagram.redirect') }}" class="c-btn u-mb-xsmall"
+                       style="background:#C3328C;"> <i class="feather icon-instagram"></i> Connect Instagram</a>
+                @endif
+            </div>
+
+                <div class="u-mt-small">
+                    @if(App\Libs\Helpers::isTwitterActive())
+                    <button class="c-btn u-mb-xsmall"
+                       style="background: #1bb1dc;"><i class="feather icon-twitter"></i> {{$tw_username}}</button>
+                        <a href="{{ route('twitter.redirect') }}" data-toggle="tooltip" title="Reconnect account"
+                           class="c-btn c-btn--danger btn-xsmall"><i class="feather icon-rotate-ccw"></i></a>
+                    @else
+                        <a href="{{ route('twitter.redirect') }}" class="c-btn u-mb-xsmall"
+                           style="background: #1bb1dc;"><i class="feather icon-twitter"></i> Connect Twitter</a>
+                    @endif
+                </div>
         </div>
     @endif
 
@@ -115,8 +100,8 @@
                   <span class="c-note__icon">
                   <i class="feather icon-info"></i>
                   </span>
-                        <p>You can add <font color="blue">#tweetgram</font> hashtag to your Instagram caption to tweet
-                            even when auto tweet is disabled.<br>The hashtag will not be inluded on the Tweet.</p>
+                        <p>You can add <span style="color:blue">#tweetgram</span> hashtag to your Instagram caption to tweet
+                            even when auto tweet is disabled.<br>The hashtag will not be included in the Tweet.</p>
                     </div>
                     <div class="c-field u-mb-xsmall">
                         <label class="c-switch">

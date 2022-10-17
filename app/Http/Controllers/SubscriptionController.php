@@ -48,7 +48,7 @@ class SubscriptionController
         $invoices = DB::table('invoices')->where('owner_id', Auth::id())->get();
         $invoice_data = array('invoices' => $invoices);
 
-        return view("subscriptions")->with($invoice_data);
+        return view("payment.subscriptions")->with($invoice_data);
     }
 
 }

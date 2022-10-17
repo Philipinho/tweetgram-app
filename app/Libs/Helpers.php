@@ -3,7 +3,13 @@
 namespace App\Libs;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Abraham\TwitterOAuth\TwitterOAuthException;
+use EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay;
+use EspressoDev\InstagramBasicDisplay\InstagramBasicDisplayException;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Contracts\Encryption\EncryptException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -23,25 +29,48 @@ class Helpers
 
     public static function isTwitterActive(): bool
     {
-
-      //  $user = DB::table('users')
-            //->select('id', 'tw_access_token', 'tw_access_secret')
-        //    ->where('id', Auth::id())->first();
-
         $social = DB::table('social_accounts')
-            //->select('id', 'tw_access_token', 'tw_access-token_secret')
             ->where('owner_id', Auth::id())->first();
 
         if (empty($social->tw_access_token) || empty($social->tw_access_token_secret)){
+            return false;
+        }
+
+        try {
+            $connection = new TwitterOAuth(env('TWITTER_CONSUMER_KEY'), env('TWITTER_CONSUMER_SECRET'),
+                Crypt::decryptString($social->tw_access_token), Crypt::decryptString($social->tw_access_token_secret));
+            $twitter_info = $connection->get('account/verify_credentials');
+        } catch (\Exception $e){
+            return false;
+        }
+
+        if (isset($twitter_info)){
             return true;
         }
 
-        $connection = new TwitterOAuth(env('TWITTER_CONSUMER_KEY'), env('TWITTER_CONSUMER_SECRET'),
-            $social->tw_access_token, $social->tw_access_token_secret);
+        return false;
+    }
 
-        $twitter_info = $connection->get('account/verify_credentials');
+    /**
+     * @throws InstagramBasicDisplayException
+     */
+    public static function isInstagramActive(): bool
+    {
+        $social = DB::table('social_accounts')
+            ->where('owner_id', Auth::id())->first();
 
-        if (isset($twitter_info)){
+        if (empty($social->insta_access_token)){
+            return false;
+        }
+
+        try {
+            $instagram = new InstagramBasicDisplay(Crypt::decryptString($social->insta_access_token));
+            $instagram_profile = $instagram->getUserProfile();
+        }catch (InstagramBasicDisplayException | DecryptException $e){
+            return false;
+        }
+
+        if (isset($instagram_profile)){
             return true;
         }
 

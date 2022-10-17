@@ -57,14 +57,14 @@ class TwitterAuthController extends Controller
                 $location = $user_info->location;
                 $followers = $user_info->followers_count;
                 $verified = $user_info->verified;
-                $oauth_access_token = $access_token['oauth_token'];
-                $oauth_access_token_secret = $access_token['oauth_token_secret'];
+                $oauth_access_token = Crypt::encryptString($access_token['oauth_token']);
+                $oauth_access_token_secret = Crypt::encryptString($access_token['oauth_token_secret']);
 
                 $sql_query = ['tw_user_id' => $user_id, 'tw_username' => $username, 'tw_name' => $name,
                     'tw_access_token' => $oauth_access_token, 'tw_access_token_secret' => $oauth_access_token_secret,
                     'tw_photo_url' => $user_pic, 'tw_followers' => $followers, 'tw_location' => $location,
                     'tw_email' => $email, 'tw_verified' => $verified, 'tw_api_version' => '1',
-                    'updated_at' => date('Y-m-d H:i:s'), 'active' => '1'];
+                    'updated_at' => date('Y-m-d H:i:s'), 'status' => '1'];
 
                 if (DB::table('social_accounts')->where('owner_id', Auth::id())->exists()) {
                     DB::table('social_accounts')
@@ -75,7 +75,7 @@ class TwitterAuthController extends Controller
 
                     $filtered_query = Arr::add($sql_query, 'owner_id', Auth::id());
                     $filtered_query = Arr::add($filtered_query, 'social_id', $social_id);
-                    $filtered_query = Arr::except($filtered_query, ['updated_at','active']);
+                    $filtered_query = Arr::except($filtered_query, ['updated_at','status']);
 
                     DB::table('social_accounts')->insert($filtered_query);
                 }

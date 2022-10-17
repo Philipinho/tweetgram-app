@@ -33,12 +33,12 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
 //Instagram Auth
 
-    Route::get('/instagram/auth',[InstagramAuthController::class,'redirectToInstagramProvider'])->name("redirectToInstagramProvider");
-    Route::get('/instagram/callback',[InstagramAuthController::class,'instagramProviderCallback'])->name("instagramProviderCallback");
+    Route::get('/instagram/auth',[InstagramAuthController::class,'redirectToInstagramProvider'])->name("instagram.redirect");
+    Route::get('/instagram/callback',[InstagramAuthController::class,'instagramProviderCallback'])->name("instagram.callback");
 
 //Twitter Auth
-    Route::get('/twitter/auth',[TwitterAuthController::class,'redirectToTwitterProvider'])->name("redirectToTwitterProvider");
-    Route::get('/twitter/callback',[TwitterAuthController::class,'twitterProviderCallback'])->name("twitterProviderCallback");
+    Route::get('/twitter/auth',[TwitterAuthController::class,'redirectToTwitterProvider'])->name("twitter.redirect");
+    Route::get('/twitter/callback',[TwitterAuthController::class,'twitterProviderCallback'])->name("twitter.callback");
 
 //    Route::get('/twitter/auth',[TwitterPKCEController::class,'redirectToTwitterProvider'])->name("redirectToTwitterProvider");
  //   Route::get('/twitter/callback',[TwitterPKCEController::class,'twitterProviderCallback'])->name("twitterProviderCallback");
@@ -49,10 +49,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name("dashboard");
 
-    Route::get('/profile', [UpdateAccountController::class, 'show'])->name("profile");
-    Route::put('/profile', [UpdateAccountController::class, 'update_info'])->name('update_profile');
-    Route::put('/profile', [UpdateAccountController::class, 'update_password'])->name("update_password");
+    Route::get('account', [UpdateAccountController::class, 'show'])->name("account");
+    Route::put("account", [UpdateAccountController::class, 'update_info'])->name("account_update");
 
+    Route::put('security', [UpdateAccountController::class, 'update_password'])->name("security");
 
     Route::get('/changeStatus', [DashboardController::class, 'changeStatus'])->name("changeStatus");
 
