@@ -5,7 +5,7 @@
 {{--
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="underline u-text-small text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
@@ -28,10 +28,10 @@
             <h4 class="u-mb-medium">Welcome Back :)</h4>
 
             <!-- Session Status -->
-           {{-- <x-auth-session-status class="mb-4" :status="session('status')" />--}}
+           {{-- <x-auth-session-status class="u-mb-small" :status="session('status')" />--}}
 
             <!-- Validation Errors -->
-            <x-auth-validation-errors class="mb-3" :errors="$errors" />
+            <x-auth-validation-errors class="u-mb-small" :errors="$errors" />
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -50,7 +50,7 @@
                 </div>
 
                 <!-- Remember Me -->
-                <div class="form-check mb-3">
+                <div class="form-check u-mb-small">
                     <input class="form-check-input" type="checkbox" id="remember_me" name="remember">
 
                     <label class="form-check-label text-gray-600" for="remember_me">

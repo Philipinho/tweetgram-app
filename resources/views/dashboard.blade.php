@@ -41,7 +41,8 @@
                 </span>
                 <div class="c-alert__content">
                     <h4 class="c-alert__title">Setup complete</h4>
-                    <p>Nothing more to do. Your Instagram posts will be tweeted automatically.</p>
+                    <p>Nothing more to do. Your Instagram posts will be tweeted automatically.
+                    You can change your social accounts by clicking on the reconnection button.</p>
                 </div>
             @else
                 <span class="c-alert__icon">

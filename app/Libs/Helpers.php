@@ -44,7 +44,7 @@ class Helpers
             return false;
         }
 
-        if (isset($twitter_info)){
+        if (isset($twitter_info->id)){
             return true;
         }
 
@@ -70,7 +70,7 @@ class Helpers
             return false;
         }
 
-        if (isset($instagram_profile)){
+        if (isset($instagram_profile->username)){
             return true;
         }
 

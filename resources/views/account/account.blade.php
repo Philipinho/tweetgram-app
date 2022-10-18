@@ -77,7 +77,7 @@
             <div class="c-card">
                 <div class="u-text-center">
                     <div class="c-avatar c-avatar--large u-mb-small u-inline-flex">
-                        <img class="c-avatar__img" src=" " alt="Avatar">
+                        <img class="c-avatar__img" src="{{ Auth::user()->getGravatar() }}" alt="Avatar">
                     </div>
 
                     <h5>{{ auth()->user()->name }}</h5>

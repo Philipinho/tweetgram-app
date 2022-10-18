@@ -13,7 +13,7 @@
             <h4 class="u-mb-medium">Sign up</h4>
 
             <!-- Validation Errors -->
-            <x-auth-validation-errors class="mb-3" :errors="$errors" />
+            <x-auth-validation-errors class="u-mb-small" :errors="$errors" />
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
@@ -39,7 +39,7 @@
                 </x-button>
 
                 <div class="flex items-center justify-end mt-4">
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                    <a class="underline u-text-small text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                         {{ __('Already registered?') }}
                     </a>
 

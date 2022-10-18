@@ -89,7 +89,7 @@
             </div>
 
 
-            <a class="c-sidebar__footer" href="{{ route("logout")  }}">
+            <a class="c-sidebar__footer" href="{{ route("logout")  }}" >
                 Logout <i class="c-sidebar__footer-icon feather icon-power"></i>
             </a>
         </aside>

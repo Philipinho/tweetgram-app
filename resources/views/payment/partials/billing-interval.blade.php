@@ -21,7 +21,7 @@
                         </h2>
 
                         <!-- Text -->
-                        <p class="small text-muted mb-3">
+                        <p class="small text-muted u-mb-small">
                             <span class="item-title">Billed monthly</span>
                         </p>
                     </div>
@@ -49,7 +49,7 @@
                     </h2>
 
                     <!-- Text -->
-                    <p class="small text-muted mb-3">
+                    <p class="small text-muted u-mb-small">
                         <span class="item-title">Billed yearly</span>
                     </p>
                 </div>

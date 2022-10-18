@@ -31,7 +31,7 @@ class UpdateAccountController extends Controller
 
         flash()->success("Your profile has been updated successfully!");
 
-        return redirect()->route("profile");
+        return redirect()->route("account");
     }
 
     public function update_password(Request $request){
